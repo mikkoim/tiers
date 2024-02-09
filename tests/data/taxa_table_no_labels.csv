@@ -1,0 +1,25 @@
+kingdom,phylum,class,order,family,genus,species,type
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis luctuosa,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis rivulorum,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,Centroptilum,Centroptilum luteolum,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,Cloeon,Cloeon dipterum,
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Cyrnus,Cyrnus trimaculatus,
+Animalia,Arthropoda,Insecta,Trichoptera,Ecnomidae,Ecnomus,Ecnomus tenellus,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Ephemeridae,Ephemera,Ephemera vulgata,
+Animalia,Annelida,Clitellata,Arhynchobdellida,Erpobdellidae,Erpobdella,Erpobdella octoculata,
+Animalia,Annelida,Clitellata,Rhynchobdellida,Glossiphoniidae,Helobdella,Helobdella stagnalis,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Heptageniidae,Heptagenia,Heptagenia dalecarlica,
+Animalia,Arthropoda,Insecta,Ephemeroptera,Heptageniidae,Kageronia,Kageronia fuscogrisea,
+Animalia,Arthropoda,Insecta,Trichoptera,Lepidostomatidae,Lepidostoma,Lepidostoma hirtum,
+Animalia,Arthropoda,Insecta,Trichoptera,Leptoceridae,Mystacides,Mystacides azureus,
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus adult
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Polycentropus,Polycentropus flavomaculatus,
+Animalia,Arthropoda,Insecta,Trichoptera,Psychomyiidae,Psychomyia,Psychomyia pusilla,
+Animalia,Mollusca,Gastropoda,Hygrophila,Lymnaeidae,Radix,Radix balthica,
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Spirosperma,Spirosperma ferox,
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Stylaria,Stylaria lacustris,
+Animalia,Arthropoda,Insecta,Trichoptera,Psychomyiidae,Tinodes,Tinodes waeneri,

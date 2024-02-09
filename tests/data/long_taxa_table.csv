@@ -1,0 +1,66 @@
+kingdom,phylum,class,order,family,genus,species,type,label
+Animalia,Annelida,Clitellata,Arhynchobdellida,Erpobdellidae,Erpobdella,Erpobdella octoculata,,Erpobdella octoculata
+Animalia,Annelida,Clitellata,Arhynchobdellida,Erpobdellidae,Erpobdella,,,Erpobdella
+Animalia,Annelida,Clitellata,Lumbriculida,Lumbriculidae,Lumbriculus,Lumbriculus variegatus,,Lumbriculus variegatus
+Animalia,Annelida,Clitellata,Rhynchobdellida,Glossiphoniidae,Helobdella,Helobdella stagnalis,,Helobdella stagnalis
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Chaetogaster,Chaetogaster cristallinus,,Chaetogaster cristallinus
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Chaetogaster,Chaetogaster diaphanus,,Chaetogaster diaphanus
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Nais,Nais christinae,,Nais christinae
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Nais,Nais communis,,Nais communis
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Nais,Nais pseudobtusa,,Nais pseudobtusa
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Potamothrix,Potamothrix bedoti,,Potamothrix bedoti
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Psammoryctides,Psammoryctides albicola,,Psammoryctides albicola
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Psammoryctides,Psammoryctides barbatus,,Psammoryctides barbatus
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Spirosperma,Spirosperma ferox,,Spirosperma ferox
+Animalia,Annelida,Clitellata,Tubificida,Naididae,Stylaria,Stylaria lacustris,,Stylaria lacustris
+Animalia,Arthropoda,Branchiopoda,Anomopoda,Eurycercidae,Eurycercus,Eurycercus lamellatus,,Eurycercus lamellatus
+Animalia,Arthropoda,Branchiopoda,Onychopoda,Polyphemidae,Polyphemus,Polyphemus pediculus,,Polyphemus pediculus
+Animalia,Arthropoda,Copepoda,Calanoida,Diaptomidae,Eudiaptomus,Eudiaptomus graciloides,,Eudiaptomus graciloides
+Animalia,Arthropoda,Copepoda,,,,,,Copepoda
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,,Oulimnius tuberculatus
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,,,Oulimnius
+Animalia,Arthropoda,Insecta,Diptera,Cecidomyiidae,,,,Cecidomyiidae
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Cladotanytarsus,Cladotanytarsus mancus,,Cladotanytarsus mancus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Glyptotendipes,Glyptotendipes cauliginellus,,Glyptotendipes cauliginellus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Glyptotendipes,Glyptotendipes pallens,,Glyptotendipes pallens
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Glyptotendipes,Glyptotendipes paripes,,Glyptotendipes paripes
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Microtendipes,Microtendipes nigellus,,Microtendipes nigellus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Orthocladius,,,Orthocladius
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Paratanytarsus,Paratanytarsus inopertus,,Paratanytarsus inopertus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Psectrocladius,Psectrocladius sordidellus,,Psectrocladius sordidellus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Pseudochironomus,Pseudochironomus prasinatus,,Pseudochironomus prasinatus
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,Tanytarsus,Tanytarsus brundini,,Tanytarsus brundini
+Animalia,Arthropoda,Insecta,Diptera,Empididae,Clinocera,Clinocera stagnalis,,Clinocera stagnalis
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,Centroptilum,Centroptilum luteolum,,Centroptilum luteolum
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,Cloeon,Cloeon dipterum,,Cloeon dipterum
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,,Caenis horaria
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis luctuosa,,Caenis luctuosa
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis rivulorum,,Caenis rivulorum
+Animalia,Arthropoda,Insecta,Ephemeroptera,Ephemeridae,Ephemera,Ephemera vulgata,,Ephemera vulgata
+Animalia,Arthropoda,Insecta,Ephemeroptera,Heptageniidae,Heptagenia,Heptagenia dalecarlica,,Heptagenia dalecarlica
+Animalia,Arthropoda,Insecta,Ephemeroptera,Heptageniidae,Kageronia,Kageronia fuscogrisea,,Kageronia fuscogrisea
+Animalia,Arthropoda,Insecta,Lepidoptera,,,,,Lepidoptera
+Animalia,Arthropoda,Insecta,Trichoptera,Ecnomidae,Ecnomus,Ecnomus tenellus,,Ecnomus tenellus
+Animalia,Arthropoda,Insecta,Trichoptera,Lepidostomatidae,Lepidostoma,Lepidostoma hirtum,,Lepidostoma hirtum
+Animalia,Arthropoda,Insecta,Trichoptera,Leptoceridae,Mystacides,Mystacides azureus,,Mystacides azureus
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Cyrnus,Cyrnus trimaculatus,,Cyrnus trimaculatus
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Polycentropus,Polycentropus flavomaculatus,,Polycentropus flavomaculatus
+Animalia,Arthropoda,Insecta,Trichoptera,Psychomyiidae,Psychomyia,Psychomyia pusilla,,Psychomyia pusilla
+Animalia,Arthropoda,Insecta,Trichoptera,Psychomyiidae,Tinodes,Tinodes waeneri,,Tinodes waeneri
+Animalia,Arthropoda,Insecta,,,,,,Insecta
+Animalia,Arthropoda,Malacostraca,Amphipoda,Gammaridae,Gammarus,Gammarus roeselii,,Gammarus roeselii
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,,Asellus aquaticus
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,,,Asellus
+Animalia,Arthropoda,Ostracoda,Podocopida,Cyprididae,Cypridopsis,Cypridopsis vidua,,Cypridopsis vidua
+Animalia,Arthropoda,Ostracoda,Podocopida,Cyprididae,,,,Cyprididae
+Animalia,Bacillariophyta,Bacillariophyceae,Cymbellales,,,,,Cymbellales
+Animalia,Bacillariophyta,Bacillariophyceae,,,,,,Bacillariophyceae
+Animalia,Cnidaria,Hydrozoa,Anthoathecata,Hydridae,Hydra,Hydra oligactis,,Hydra oligactis
+Animalia,Cnidaria,Hydrozoa,Anthoathecata,Hydridae,Hydra,Hydra oxycnida,,Hydra oxycnida
+Animalia,Heterokontophyta,Oomycota,Saprolegniales,,,,,Saprolegniales
+Animalia,Mollusca,Gastropoda,Hygrophila,Lymnaeidae,Radix,Radix auricularia,,Radix auricularia
+Animalia,Mollusca,Gastropoda,Hygrophila,Lymnaeidae,Radix,Radix balthica,,Radix balthica
+Animalia,Mollusca,Gastropoda,Littorinimorpha,Bithyniidae,Bithynia,Bithynia tentaculata,,Bithynia tentaculata
+Animalia,Mollusca,Gastropoda,,,,,,Gastropoda
+Animalia,Rhodophyta,Florideophyceae,,,,,,Florideophyceae
+Animalia,Rotifera,Monogononta,,,,,,Monogononta

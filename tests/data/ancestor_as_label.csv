@@ -1,0 +1,6 @@
+kingdom,phylum,class,order,family,genus,species,type,label
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,,,Asellidae
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,,Asellus_aquaticus
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,,Caenis_horaria
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis luctuosa,,Caenis_luctuosa
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis rivulorum,,Caenis_rivulorum

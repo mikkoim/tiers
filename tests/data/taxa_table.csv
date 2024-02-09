@@ -1,0 +1,15 @@
+kingdom,phylum,class,order,family,genus,species,type,label
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,,,As
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,,Asellus_aquaticus
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,,Asellus aquaticus
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,,Caenis_horaria
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis luctuosa,,Caenis_luctuosa
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis rivulorum,,Caenis_rivulorum
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,,,,Baetidae
+Animalia,Arthropoda,Insecta,Ephemeroptera,Baetidae,Cloeon,Cloeon dipterum,,Cloeon_dipterum
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Cyrnus,Cyrnus trimaculatus,,Cyrnus_trimaculatus
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva,Oulimnius_tuberculatus
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus adult,Oulimnius_tuberculatus_adult
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva,Oulimnius_tuberculatus_larv
+Animalia,Arthropoda,Insecta,Trichoptera,Polycentropodidae,Polycentropus,Polycentropus flavomaculatus,,Polycentropus_flavomaculatus
+Animalia,Mollusca,Gastropoda,Hygrophila,Lymnaeidae,Radix,Radix balthica,,RaBa
