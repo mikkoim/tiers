@@ -6,7 +6,7 @@ A hierarchical label handling library for Python
 You can install tiers using pip:
 
 ```bash
-pip install git+git://github.com/mikkoim/tiers.git
+pip install git+https://github.com/mikkoim/tiers.git
 ```
 
 # Examples
