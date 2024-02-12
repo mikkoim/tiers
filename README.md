@@ -55,7 +55,6 @@ level3_labels = tree.map(["Label5", "Label4", "Label3"],
                         level="Level3",
                         strict=True)
 print(level3_labels) # Output: ['B3c', None, None]
-# 
 ```
 
 ## Setting the tree to a level and mapping labels to it
