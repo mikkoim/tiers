@@ -33,18 +33,29 @@ tree.show()
 # root
 # ├── A
 # │   ├── A1
+# │   │   └── A1a
 # │   └── A2
+# │       └── A2b
 # └── B
 #     ├── B2
 #     └── B3
+#         └── B3c
 ```
 
 ## Mapping labels to nodes at a specific level
 
 ```python
 # Map labels to nodes at a specific level
-mapped_nodes = tree.map(["Label1", "Label2", "Label3", "Label4", "Label5"], level="Level2")
+mapped_nodes = tree.map(["Label1", "Label2", "Label3", "Label4", "Label5"],
+                        level="Level2")
 print(mapped_nodes)  # Output: ['A1', 'A2', 'B', 'B2', 'B3']
+
+# Mapping can be also done stricty on specific level
+level3_labels = tree.map(["Label5", "Label4", "Label3"],
+                        level="Level3",
+                        strict=True)
+print(level3_labels) # Output: ['B3c', None, None]
+# 
 ```
 
 ## Setting the tree to a level and mapping labels to it
