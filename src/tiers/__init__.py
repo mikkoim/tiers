@@ -78,6 +78,15 @@ def table2tree(df, names_col="names", parents_col="parents"):
 
     return tree
 
+def get_parents(node: bigtree.Node, parents=None):
+    """Get the parents of a node in a tree."""
+    if parents is None: # Initialize
+        parents = []
+    if node is not None: # If node is not the root
+        return get_parents(node.parent, parents + [node.name])
+    else:
+        return parents
+
 def coarsen(labels, root, depth, return_map=False):
     """Coarsens a list of labels based on a depth in a tree"""
     new_map = {}
@@ -261,6 +270,28 @@ class Tree():
     def show(self, **kwargs):
         """Shows the tree"""
         self.root.show(**kwargs)
+    
+    def subset(self, subset):
+        """Returns a subset of the tree as a new tree"""
+        if not isinstance(subset, list):
+            raise ValueError("Subset must be a list of strings")
+        
+        rel = table2rel(self.df) # Get the relational dataframe
+        leaf_rel = rel[rel["names"].isin(subset)] # Only the rows of the subset
+        all_parents = []
+        for x in leaf_rel["names"].values: # Get all parents of the subset
+            node = bigtree.find_name(self.root, x) # Find the node for the leaf
+            all_parents.append(get_parents(node)) # Get the parents of the leaf
+
+        # Create a new dataframe with the parents
+        dfnew = pd.DataFrame([x[::-1] for x in all_parents])
+        if len(dfnew.columns) != len(self.levels): # Add empty columns if necessary
+            dfnew = pd.concat([dfnew, pd.DataFrame(columns=range(len(self.levels) - len(dfnew.columns)))], axis=1)
+
+        dfnew.columns = self.levels
+        new_label_map = {k:v for k,v in self.label_map.items() if v in subset}
+
+        return Tree(df=dfnew, label_map=new_label_map)
 
     def show_simple(self):
         """Shows the simplified tree"""
