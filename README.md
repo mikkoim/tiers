@@ -9,6 +9,12 @@ You can install tiers using pip:
 pip install git+https://github.com/mikkoim/tiers.git
 ```
 
+For the latest version, install the dev branch:
+
+```bash
+pip install https://github.com/mikkoim/tiers/archive/dev.zip
+```
+
 # Examples
 
 ## Creating a tiers Tree from a Pandas DataFrame:
