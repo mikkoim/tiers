@@ -4,6 +4,7 @@ Tiers - a hierarchical label handling library
 import bigtree
 import pandas as pd
 import warnings
+import numpy as np
 
 def columns_disjoint(df):
     """Checks if dataframe columns are disjoint from each other"""
@@ -43,6 +44,54 @@ def leaf_relations(row):
         if not pd.isna(row.iloc[-i]):
             r.append((row.iloc[-i], row.iloc[-i-1]))
     return r
+
+def check_for_gaps(df):
+    """Checks for gaps in dataframe rows.
+    If a row starts with values, changes to None, and then changes back to
+    values, this function will detect it.
+    For example [1, 2, None, None, 5] has a gap, while [1, 2, 3, None, None] does not.
+    
+    Args:
+        df (pd.DataFrame): The dataframe to check for gaps.
+
+    Returns:
+        list: A list of indices where gaps occur. If no gaps are found, returns None.
+        
+    """
+    A = (df.isna().values*1)
+    gaps = np.apply_along_axis(lambda x: np.abs(np.diff(x)).sum(), 1, A)
+    breakpoint()
+    if np.any(gaps > 1):
+        gap_indices = np.where(gaps>1)[0].tolist()
+        return gap_indices
+    return None
+
+def fill_gaps(df, suffix="_fill"):
+    """Fills gaps in a dataframe.
+    If a row starts with values, changes to None, and then changes back to
+    values, this function will fill the gap with the last value, appended with a suffix.
+    For example ['a', 'b', None, 'c', None] will be filled to
+    ['a', 'b', 'b_dummy', 'c', None].
+    
+    Args:
+        df (pd.DataFrame): The dataframe to fill gaps in.
+
+    Returns:
+        pd.DataFrame: The dataframe with gaps filled.
+    """
+    df = df.copy()
+    gaps = check_for_gaps(df) # the gap indices
+    A = (df.isna().values*1) # the dataframe as a binary matrix
+    for i in gaps: # iterate over rows with gaps
+        r = df.iloc[i] # row values
+        nan_indices = np.where(A[i] == 1)[0] # indices of NaN values
+        last_nan_idx = np.where(A[i]!=1)[0][-1]+1 # index of last non-NaN value, values after this will be NaN
+        rnew = r.copy() # copy the row
+        for ni in nan_indices: # iterate over NaN indices
+            rnew[ni] = str(rnew[ni-1]) + suffix # fill NaN values with the previous value + "_fill"
+        rnew[last_nan_idx:] = np.nan # set values after the last non-NaN value to NaN
+        df.iloc[i] = rnew # set the new row values
+    return df
     
 def table2rel(df):
     """Turns a pandas DataFrame into a relational list"""
@@ -198,8 +247,7 @@ class Tree():
     def __init__(self,
                  df: pd.DataFrame,
                  label_map = None,
-                 node_remapping=False,
-                 set_root=False):
+                 node_remapping=False):
         """Initializes a Tree object. Tree objects store the hierarchy"""
         self.df = df # The hierarchy dataframe
 
@@ -212,6 +260,13 @@ class Tree():
 
         # Set levels from dataframe columns and check that the format is ok
         assert columns_disjoint(df)
+
+        # Check for gaps in the dataframe
+        gap_indices = check_for_gaps(df)
+        if gap_indices:
+            df = fill_gaps(df)
+            warnings.warn(f"Dataframe had gaps in rows {gap_indices}. Filled with the last non-NaN value + '_fill'")
+
         self.levels = df.columns.tolist()
         self.levels_sortable = [f"{i:02d}_{s}" for i,s in enumerate(self.levels)]
         if "leaf" in self.levels: raise ValueError("A level column cannot be named 'leaf'")
@@ -256,8 +311,7 @@ class Tree():
         label_map = {label: value for label,value in z}
         return cls(df=tree_df,
                    label_map=label_map,
-                   node_remapping=node_remapping,
-                   set_root=set_root)
+                   node_remapping=node_remapping)
     
     def _check_label_map(self, label_map):
         """Checks if any of the labels are in nodes and warns accordingly"""
