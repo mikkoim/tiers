@@ -1,0 +1,13 @@
+kingdom,phylum,class,order,family,genus,species,label
+Animalia,Nematomorpha,,,,,,NEMATOMORPHA
+Animalia,Mollusca,Gastropoda,Hygrophila,Lymnaeidae,Radix,Radix balthica,Radix balthica/labiata
+Animalia,Arthropoda,Arachnida,Trombidiformes,Arrenuridae,Hydracarina,,Hydracarina
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,Asellus aquaticus
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,Caenis horaria
+Animalia,Arthropoda,Insecta,Ephemeroptera,Heptageniidae,Kageronia,Kageronia fuscogrisea,Kageronia fuscogrisea
+Animalia,Arthropoda,Insecta,Ephemeroptera,Limnephilidae,,,Limnephilidae
+Animalia,Arthropoda,Insecta,Diptera,Chironomidae,,,Chironomidae
+Animalia,Arthropoda,Insecta,Diptera,Ceratopogonidae,,,Ceratopogonidae
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus
+Animalia,Annelida,Oligochaeta,,,,,OLIGOCHAETA
+Animalia,,,,,,Gyraulus albus,Gyraulus albus

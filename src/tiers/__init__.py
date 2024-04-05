@@ -25,7 +25,12 @@ def get_row_leaf(row):
     return row[i]
 
 def get_leaves(df) -> pd.Series:
-    """Find the leaves (leftmost not-NaN value of each row) for a dataframe"""
+    """Find the leaves (leftmost not-NaN value of each row) for a dataframe.
+    """
+    # Check for gaps
+    gaps = check_for_gaps(df)
+    if gaps:
+        raise ValueError(f"Dataframe has gaps in rows {gaps}. Leaves cannot be found. Fill gaps first.")
     lowest = []
     for i, row in df.iterrows():
         lowest.append((i, get_row_leaf(row)))
@@ -60,7 +65,6 @@ def check_for_gaps(df):
     """
     A = (df.isna().values*1)
     gaps = np.apply_along_axis(lambda x: np.abs(np.diff(x)).sum(), 1, A)
-    breakpoint()
     if np.any(gaps > 1):
         gap_indices = np.where(gaps>1)[0].tolist()
         return gap_indices
@@ -92,6 +96,10 @@ def fill_gaps(df, suffix="_fill"):
         rnew[last_nan_idx:] = np.nan # set values after the last non-NaN value to NaN
         df.iloc[i] = rnew # set the new row values
     return df
+
+def _fill_gaps(df, suffix="_fill"):
+    """Fills gaps in a dataframe."""
+    return fill_gaps(df, suffix)
     
 def table2rel(df):
     """Turns a pandas DataFrame into a relational list"""
@@ -248,7 +256,19 @@ class Tree():
                  df: pd.DataFrame,
                  label_map = None,
                  node_remapping=False):
-        """Initializes a Tree object. Tree objects store the hierarchy"""
+        """Initializes a Tree object. Tree objects store the hierarchy.
+
+        Args:
+            df (pd.DataFrame): The hierarchy dataframe.
+            label_map (dict, optional): Stores the mapping between labels and node names. Defaults to None.
+            node_remapping (bool, optional): Flag to indicate whether node remapping is enabled. Defaults to False.
+
+        Raises:
+            ValueError: If a level column is named 'leaf' or 'simple'.
+
+        Warnings:
+            UserWarning: If the dataframe has gaps in rows and `fill_gaps` is not provided, the gaps will be filled with the last non-NaN value + '_fill'.
+        """
         self.df = df # The hierarchy dataframe
 
         if label_map is None:
@@ -260,24 +280,24 @@ class Tree():
 
         # Set levels from dataframe columns and check that the format is ok
         assert columns_disjoint(df)
-
-        # Check for gaps in the dataframe
-        gap_indices = check_for_gaps(df)
-        if gap_indices:
-            df = fill_gaps(df)
-            warnings.warn(f"Dataframe had gaps in rows {gap_indices}. Filled with the last non-NaN value + '_fill'")
-
         self.levels = df.columns.tolist()
         self.levels_sortable = [f"{i:02d}_{s}" for i,s in enumerate(self.levels)]
         if "leaf" in self.levels: raise ValueError("A level column cannot be named 'leaf'")
         if "simple" in self.levels: raise ValueError("A level column cannot be named 'simple'")
 
+        # Check for gaps in the dataframe
+        gap_indices = check_for_gaps(df)
+        if gap_indices:
+            raise ValueError(f"Dataframe has gaps in rows {gap_indices}. "
+                             "Fill gaps first with tiers.fill_gaps(df), "
+                             "or set fill_gaps=True in tiers.Tree.from_dataframe")
+
         # Create the tree and its simplified version
-        self.root = table2tree(df)
+        self.root = table2tree(self.df)
         self.root_simple, self._leaf2simple_dict = simplify_tree(self.root)
 
         # Get the set of node names
-        self.nodes = set(df.values.ravel().tolist())
+        self.nodes = set(self.df.values.ravel().tolist())
 
         # Define mapping dicts
         self._level2sortable_dict = {k:v for k,v in zip(self.levels, self.levels_sortable)}
@@ -297,13 +317,37 @@ class Tree():
     def from_dataframe(cls,
                        df: pd.DataFrame,
                        node_remapping=False,
-                       set_root=False):
-        """Initializes a tree from a dataframe, where the last column is the label column"""
+                       set_root=False,
+                       fill_gaps=None):
+        """Initializes a tree from a dataframe, where the last column is the label column
+        Initialization with this function handles dataframes that have labels as the last column,
+        as well as filling gaps in the dataframe.
+
+        Args:
+            df (pd.DataFrame): The dataframe to initialize the tree from.
+            node_remapping (bool, optional): Flag to indicate whether node remapping is enabled. Defaults to False.
+            set_root (bool, optional): Flag to indicate whether a root node should be added. Defaults to False.
+            fill_gaps: Whether to fill gaps in dataframe. Defaults to None. If False, raises an exception if gaps are found.
+        """
         if set_root:
             df = add_root(df)
         # Separate label column and the actual hierarchy
         labels = df.iloc[:,-1]
         tree_df = df.iloc[:,:-1]
+
+        # Check for gaps in the dataframe
+        gap_indices = check_for_gaps(tree_df)
+        if gap_indices:
+            if fill_gaps:
+                tree_df = _fill_gaps(tree_df)
+            elif fill_gaps is None:
+                tree_df = _fill_gaps(tree_df)
+                warnings.warn(f"Dataframe had gaps in rows {gap_indices}. "
+                              "Filled with the last non-NaN value + '_fill'. "
+                              "Set fill_gaps=True to fill gaps automatically "
+                              "and suppress this warning")
+            else:
+                raise Exception("Dataframe has gaps in rows. Fill gaps of set fill_gaps=True")
 
         # Create the mapping from labels to leaves
         leaves = get_leaves(tree_df)
@@ -318,7 +362,11 @@ class Tree():
         for k in label_map.keys():
             if k in self.nodes and label_map[k] != k:
                 self._node_as_label = True
-                warnings.warn(f"label '{k}' is in the hierarchy as a node. Set `node_remapping=True` if you want to use node names as labels and suppress this warning")
+                warnings.warn(f"label '{k}' is in the hierarchy as a higher-level node. "
+                              f"It will map to '{label_map[k]}' by default, unless nodes=True is set. "
+                              "Remove the redundant row from the dataframe or set "
+                              "`node_remapping=True` if you want to use node "
+                              "names as labels and suppress this warning")
 
     # Visualization
     def show(self, **kwargs):
