@@ -486,11 +486,28 @@ class Tree():
         else:
             return [self.map(l, level=level, strict=strict, nodes=nodes) for l in labels]
 
+    def get_level(self, labels, nodes:bool=False, prefix:bool=True):
+        """Maps a list of labels to the level it is on
+        Args:
+            labels: list of labels
+            nodes (bool): if True, labels are node strings, not labels
+            prefix (bool): if True, returns the level with the prefix, 
+                            e.g. '01_level', if False, returns 'level'
+        Returns:
+            str or list: the level of the label(s)
+        """
+        if isinstance(labels, str): # If a single string is passed
+            if not nodes:
+                l = self.node_level(self.label2node(labels))
+                if prefix:
+                    return l
+                return l[3:]
+            l = self.node_level(labels)
+            if prefix:
+                return l
+            return l[3:]
+        return [self.get_level(l, nodes=nodes, prefix=prefix) for l in labels]
+
 
     def map_level(self, labels, nodes=False):
-        """Maps a list of labels to the level it is on"""
-        if isinstance(labels, str):
-            if not nodes:
-                return self.node_level(self.label2node(labels))
-            return self.node_level(labels)
-        return [self.map_level(l, nodes=nodes) for l in labels]
+        warnings.warn("map_level is deprecated. Use get_level instead")
