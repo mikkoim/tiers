@@ -334,8 +334,8 @@ class Tree:
 
         if label_map is None:
             label_map = {}
-        self.label_map = label_map  # Stores the mapping between
-        # labels and node names
+        self.label_map = label_map
+        self.node_remapping = node_remapping
 
         # Levels
         self.level_int = -1  # Current level as int. -1 is the leaf level
@@ -664,3 +664,27 @@ class Tree:
 
     def map_level(self, labels, nodes=False):
         warnings.warn("map_level is deprecated. Use get_level instead")
+
+    def update_label_map(self, label_map: dict) -> "Tree":
+        """Updates the label map. First asserts that all values are in nodes
+
+        Args:
+            label_map (dict): A dict that maps new values to nodes. Values must already
+                be in nodes
+        Returns:
+            Tree: A new Tree object with the updated label_map
+        Raises:
+            ValueError: If a value in label_map is not in nodes
+
+        Examples:
+            >>> tree = tiers.Tree.from_dataframe(df)
+            >>> tree.update_label_map({"new_label": "old_node"})
+        """
+        for v in label_map.values():
+            if v not in self.nodes:
+                raise ValueError(f"Node '{v}' not in nodes")
+        new_label_map = self.label_map.copy()
+        new_label_map.update(label_map)
+        return Tree(
+            df=self.df, label_map=new_label_map, node_remapping=self.node_remapping
+        )

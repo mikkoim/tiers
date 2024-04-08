@@ -114,3 +114,21 @@ def test_fillable_gaps_not(df_fillable_gaps_not):
     with pytest.raises(ValueError) as excinfo:
         tree = tiers.Tree.from_dataframe(df_fillable_gaps_not, fill_gaps=True)
     assert "The dataframe has duplicate name-parent pairs." in str(excinfo.value)
+
+
+@pytest.mark.usefixtures("df_simple_table")
+def test_update_labels(df_simple_table):
+    """Tests the tree.labels() method."""
+    tree = tiers.Tree.from_dataframe(df_simple_table)
+    old_map = tree.label_map
+    tree.update_label_map({"As": "Asellus", "Ca": "Caenis"})
+    # This should not change the tree, only return a new one
+    assert old_map == tree.label_map
+
+    # This returns a new tree with a changed label map
+    tree = tree.update_label_map({"As": "Asellus", "Ca": "Caenis"})
+
+    # This should raise an error
+    with pytest.raises(ValueError) as excinfo:
+        tree = tree.update_label_map({"test_label": "test_node"})
+    assert "Node 'test_node' not in nodes" in str(excinfo.value)

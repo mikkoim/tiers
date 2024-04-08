@@ -1,0 +1,6 @@
+kingdom,phylum,class,order,family,genus,species,type,label
+Animalia,Arthropoda,Malacostraca,Isopoda,Asellidae,Asellus,Asellus aquaticus,,Asellus aquaticus
+Animalia,Arthropoda,Insecta,Ephemeroptera,Caenidae,Caenis,Caenis horaria,,Caenis_horaria
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva,Oulimnius_tuberculatus
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus adult,Oulimnius_tuberculatus_adult
+Animalia,Arthropoda,Insecta,Coleoptera,Elmidae,Oulimnius,Oulimnius tuberculatus,Oulimnius tuberculatus larva,Oulimnius_tuberculatus_larv
