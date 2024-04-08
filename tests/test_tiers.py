@@ -18,6 +18,10 @@ def test_tree_creation(df_taxa_table):
     )
     tree.show()
     tree.show_simple()
+    tree.show(labels=True)
+    with pytest.raises(ValueError) as excinfo:
+        tree.show_simple(labels=True)
+    assert "Labels are not supported in simple tree" in str(excinfo.value)
 
     tree.set_level("genus")
     assert tree.level == "05_genus"
@@ -133,6 +137,14 @@ def test_update_labels(df_simple_table):
         tree = tree.update_label_map({"test_label": "test_node"})
     assert "Node 'test_node' not in nodes" in str(excinfo.value)
 
+    # Trying to update a label to a higher-level node should raise a warning
+    with pytest.warns(UserWarning) as record:
+        tree = tree.update_label_map({"Asellus": "Asellus aquaticus"})
+    assert "label 'Asellus' is in the hierarchy as a higher-level node." in str(
+        record[0].message
+    )
+    tree = tree.update_label_map({"Asellus": "Asellus aquaticus"}, node_remapping=True)
+
 
 @pytest.mark.usefixtures("df_simple_table")
 def test_labels(df_simple_table):
@@ -142,4 +154,4 @@ def test_labels(df_simple_table):
     assert labels == [["Asellus aquaticus", "AsAq"], [], ["Caenis_horaria"]]
 
     assert tree.labels("Asellus aquaticus") == ["Asellus aquaticus", "AsAq"]
-    assert tree.labels("asd") == [] # non-existing nodes should return an empty list
+    assert tree.labels("asd") == []  # non-existing nodes should return an empty list

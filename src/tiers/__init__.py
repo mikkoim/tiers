@@ -364,7 +364,8 @@ class Tree:
         self.root_simple, self._leaf2simple_dict = simplify_tree(self.root)
 
         # Get the set of node names
-        self.nodes = set(self.df.values.ravel().tolist())
+        self.nodes = self.df.values.ravel().tolist()
+        self.nodes = {x for x in self.nodes if pd.notna(x)}
 
         # Define mapping dicts
         self._level2sortable_dict = {
@@ -378,6 +379,8 @@ class Tree:
             if not node_remapping:
                 self._check_label_map(self.label_map)
 
+        # Update node attributes to match the label map
+        self._set_node_attributes()
         # Flags
         self._node_as_label = False
 
@@ -444,9 +447,20 @@ class Tree:
                     "names as labels and suppress this warning"
                 )
 
+    def _set_node_attributes(self):
+        """Sets bigtree node attributes based on the label map"""
+        for node_str in self.nodes:
+            node = self.get_node(node_str)
+            labels = self.labels(node_str)
+            labels = [l for l in labels if l != node_str]
+            if len(labels) > 0:
+                node.set_attrs({"labels": labels})
+
     # Visualization
-    def show(self, **kwargs):
+    def show(self, labels=False, **kwargs):
         """Shows the tree"""
+        if labels:
+            self.root.show(attr_list=["labels"], **kwargs)
         self.root.show(**kwargs)
 
     def subset(self, subset):
@@ -477,8 +491,10 @@ class Tree:
 
         return Tree(df=dfnew, label_map=new_label_map)
 
-    def show_simple(self):
+    def show_simple(self, labels=False):
         """Shows the simplified tree"""
+        if labels:
+            raise ValueError("Labels are not supported in simple tree")
         self.root_simple.show()
 
     # Levels
@@ -686,7 +702,7 @@ class Tree:
     def map_level(self, labels, nodes=False):
         warnings.warn("map_level is deprecated. Use get_level instead")
 
-    def update_label_map(self, label_map: dict) -> "Tree":
+    def update_label_map(self, label_map: dict, node_remapping=None) -> "Tree":
         """Updates the label map. First asserts that all values are in nodes
 
         Args:
@@ -706,6 +722,4 @@ class Tree:
                 raise ValueError(f"Node '{v}' not in nodes")
         new_label_map = self.label_map.copy()
         new_label_map.update(label_map)
-        return Tree(
-            df=self.df, label_map=new_label_map, node_remapping=self.node_remapping
-        )
+        return Tree(df=self.df, label_map=new_label_map, node_remapping=node_remapping)
