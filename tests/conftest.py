@@ -36,3 +36,11 @@ def df_all_taxa_table():
 @pytest.fixture
 def df_all_gaps():
     return pd.read_csv("tests/data/all_gaps.csv")
+
+@pytest.fixture
+def df_fillable_gaps():
+    return pd.read_csv("tests/data/fillable_gaps.csv")
+
+@pytest.fixture
+def df_fillable_gaps_not():
+    return pd.read_csv("tests/data/fillable_gaps_not.csv")

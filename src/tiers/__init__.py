@@ -125,14 +125,30 @@ def rel2tree(rel, names_col="names", parents_col="parents"):
     rel_list = list(zip(parents, names))
     return bigtree.list_to_tree_by_relation(rel_list)
 
+def check_duplicates_solvable(rel):
+    """Checks whether the duplicates in the relation table are solvable."""
+    duplicates = rel[rel["names"].duplicated(keep=False)]
+    r = True
+    for name in duplicates["names"].unique():
+        parents = duplicates.set_index("names").loc[name]["parents"]
+        n = len(parents)
+        if n != 2:
+            r = False
+        if parents.isna().sum() != 1:
+            r = False
+    return r
+
 def table2tree(df, names_col="names", parents_col="parents"):
     """Turns a pandas DataFrame into a Bigtree tree"""
     rel = table2rel(df)
     try:
         tree = rel2tree(rel, names_col=names_col, parents_col=parents_col)
     except ValueError as e:
-        raise ValueError(f"{e} - The dataframe does not have a root node - you can automatically set one with set_root=True")
-
+        if rel["names"].is_unique:
+            raise ValueError(f"{e}\n\nThe dataframe does not have a root node - you can automatically set one with set_root=True")
+        else:
+            raise ValueError(f"{e}\n\nThe dataframe has duplicate name-parent pairs. "
+                            "Check nodes above and make each node has a single parent.")
     return tree
 
 def get_parents(node: bigtree.Node, parents=None):

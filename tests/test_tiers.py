@@ -87,18 +87,16 @@ def test_reoccuring_value(df_reoccuring_value):
         tree = tiers.Tree.from_dataframe(df_reoccuring_value)
     assert "Columns are not disjoint. {'Isopoda'} exist multiple times" in str(excinfo.value)
 
-
-@pytest.mark.usefixtures("df_large_taxa_table")
-def test_large_table_with_gaps(df_large_taxa_table):
-    """Test the creation of a tree from a large dataframe with gaps in the rows."""
-    with pytest.warns(UserWarning) as record:
-        tree = tiers.Tree.from_dataframe(df_large_taxa_table)
-    assert len(record) == 1
-    assert "Dataframe had gaps in rows" in str(record[0].message)
-
 @pytest.mark.usefixtures("df_all_taxa_table")
 def test_gap_filling(df_all_taxa_table):
     with pytest.warns(UserWarning) as record:
         tree = tiers.Tree.from_dataframe(df_all_taxa_table)
     assert len(record) == 1
     assert "Dataframe had gaps in rows" in str(record[0].message)
+    tree = tiers.Tree.from_dataframe(df_all_taxa_table, fill_gaps=True)
+
+@pytest.mark.usefixtures("df_fillable_gaps_not")
+def test_fillable_gaps_not(df_fillable_gaps_not):
+    with pytest.raises(ValueError) as excinfo:
+        tree = tiers.Tree.from_dataframe(df_fillable_gaps_not, fill_gaps=True)
+    assert "The dataframe has duplicate name-parent pairs." in str(excinfo.value)
