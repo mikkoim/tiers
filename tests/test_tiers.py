@@ -132,3 +132,14 @@ def test_update_labels(df_simple_table):
     with pytest.raises(ValueError) as excinfo:
         tree = tree.update_label_map({"test_label": "test_node"})
     assert "Node 'test_node' not in nodes" in str(excinfo.value)
+
+
+@pytest.mark.usefixtures("df_simple_table")
+def test_labels(df_simple_table):
+    tree = tiers.Tree.from_dataframe(df_simple_table)
+    tree = tree.update_label_map({"AsAq": "Asellus aquaticus", "As": "Asellus"})
+    labels = tree.labels(["Asellus aquaticus", "Insecta", "Caenis horaria"])
+    assert labels == [["Asellus aquaticus", "AsAq"], [], ["Caenis_horaria"]]
+
+    assert tree.labels("Asellus aquaticus") == ["Asellus aquaticus", "AsAq"]
+    assert tree.labels("asd") == [] # non-existing nodes should return an empty list

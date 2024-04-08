@@ -5,6 +5,7 @@ import bigtree
 import pandas as pd
 import warnings
 import numpy as np
+from typing import Union
 
 
 def columns_disjoint(df):
@@ -596,6 +597,26 @@ class Tree:
             return self.levels_sortable[node.depth - 1]
         return self.levels_sortable[self.get_node(node).depth - 1]
 
+    def labels(self, nodes: Union[str, list]) -> list:
+        """Returns the labels of the nodes
+
+        Args:
+            nodes (str | list): The node names
+
+        Returns:
+            list: a list of lists, where each list contains the labels of the nodes
+        """
+        if isinstance(nodes, str):
+            return self.labels([nodes])[0]
+        labels = []
+        for node in nodes:
+            node_labels = []
+            for k, v in self.label_map.items():
+                if v == node:
+                    node_labels.append(k)
+            labels.append(node_labels)
+        return labels
+
     def map(self, labels, level: str = None, strict=False, nodes=False):
         """
         args:
@@ -678,7 +699,7 @@ class Tree:
 
         Examples:
             >>> tree = tiers.Tree.from_dataframe(df)
-            >>> tree.update_label_map({"new_label": "old_node"})
+            >>> tree = tree.update_label_map({"new_label": "old_node"})
         """
         for v in label_map.values():
             if v not in self.nodes:
