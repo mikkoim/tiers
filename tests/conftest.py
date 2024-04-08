@@ -53,6 +53,11 @@ def df_simple_table():
 
 
 @pytest.fixture
+def df_very_simple():
+    return pd.read_csv("tests/data/very_simple.csv")
+
+
+@pytest.fixture
 def df_all_gaps():
     return pd.read_csv("tests/data/all_gaps.csv")
 

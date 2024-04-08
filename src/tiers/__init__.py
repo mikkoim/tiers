@@ -553,6 +553,23 @@ class Tree:
             return self.label2node(s)
         return self.get_node(s)  # Else in nodes
 
+    @property
+    def rel_dict(self):
+        rel = table2rel(self.df)
+        return {k: v for k, v in zip(rel["names"], rel["parents"])}
+
+    @property
+    def parent_map(self):
+        return self.rel_dict
+
+    @property
+    def relation_table(self):
+        return table2rel(self.df)
+
+    @property
+    def rel(self):
+        return self.relation_table
+
     # Manipulation
     def merge(self, tree):
         """Merges two trees together"""
@@ -633,6 +650,7 @@ class Tree:
             labels.append(node_labels)
         return labels
 
+    # Mapping values
     def map(self, labels, level: str = None, strict=False, nodes=False):
         """
         args:

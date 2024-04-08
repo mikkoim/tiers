@@ -155,3 +155,25 @@ def test_labels(df_simple_table):
 
     assert tree.labels("Asellus aquaticus") == ["Asellus aquaticus", "AsAq"]
     assert tree.labels("asd") == []  # non-existing nodes should return an empty list
+
+
+@pytest.mark.usefixtures("df_very_simple")
+def test_rels(df_very_simple):
+    rel_ref = pd.DataFrame(
+        {
+            "names": ["g1", "A", "g2", "B", "g3"],
+            "parents": ["A", "root", "B", "root", "B"],
+        }
+    )
+    tree = tiers.Tree.from_dataframe(df_very_simple)
+    pd.testing.assert_frame_equal(tree.rel, rel_ref)
+    pd.testing.assert_frame_equal(tree.relation_table, rel_ref)
+
+    assert tree.rel_dict == {"g1": "A", "A": "root", "g2": "B", "B": "root", "g3": "B"}
+    assert tree.parent_map == {
+        "g1": "A",
+        "A": "root",
+        "g2": "B",
+        "B": "root",
+        "g3": "B",
+    }
