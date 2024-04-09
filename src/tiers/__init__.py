@@ -384,6 +384,9 @@ class Tree:
         # Flags
         self._node_as_label = False
 
+        # Mapping cache
+        self._map_cache = {}
+
     # Initialization
     @classmethod
     def from_dataframe(
@@ -666,12 +669,20 @@ class Tree:
             target_level = self.level_int
 
         if isinstance(labels, str):
+            # Try to get the value first from the cache
+            node_key = (labels, level, strict, nodes)
+            if node_key in self._map_cache:
+                return self._map_cache[node_key]
+
+            # Otherwise we have to calculate it
             try:
                 if target_level == -1:
                     if not nodes:
-                        return self.string2node(labels).name
-                    return self.get_node(labels).name  # In case labels is a
-                    # node string
+                        val = self.string2node(labels).name
+                    else:
+                        val = self.get_node(labels).name  # In case labels is a node
+                    self._map_cache[node_key] = val
+                    return val
 
                 else:  # We need to traverse the tree
                     if not nodes:
@@ -682,12 +693,16 @@ class Tree:
                     # If node is below the level and we want to return them
                     # as None
                     if (node.depth - 1 < target_level) and strict:
-                        return None
+                        val = None
+                        self._map_cache[node_key] = val
+                        return val
 
                     # Otherwise
                     while node.depth - 1 > target_level:
                         node = node.parent
-                    return node.name
+                    val = node.name
+                    self._map_cache[node_key] = val
+                    return val
             except Exception as e:
                 raise e
         else:
