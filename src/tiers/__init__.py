@@ -6,6 +6,7 @@ import pandas as pd
 import warnings
 import numpy as np
 from typing import Union
+from collections.abc import Iterable
 
 
 def columns_disjoint(df):
@@ -26,9 +27,9 @@ def columns_disjoint(df):
 def get_row_leaf(row):
     "Returns the leftmost not-NaN value of a pandas row"
     for i in range(len(row)):
-        if pd.isna(row[i]):
-            return row[i - 1]
-    return row[i]
+        if pd.isna(row.iloc[i]):
+            return row.iloc[i - 1]
+    return row.iloc[i]
 
 
 def get_leaves(df) -> pd.Series:
@@ -111,10 +112,10 @@ def fill_gaps(df, suffix="_fill"):
         )  # index of last non-NaN value, values after this will be NaN
         rnew = r.copy()  # copy the row
         for ni in nan_indices:  # iterate over NaN indices
-            rnew[ni] = (
-                str(rnew[ni - 1]) + suffix
+            rnew.iloc[ni] = (
+                str(rnew.iloc[ni - 1]) + suffix
             )  # fill NaN values with the previous value + "_fill"
-        rnew[last_nan_idx:] = np.nan  # set values after the last
+        rnew.iloc[last_nan_idx:] = np.nan  # set values after the last
         # non-NaN value to NaN
         df.iloc[i] = rnew  # set the new row values
     return df
