@@ -1,0 +1,133 @@
+AcLa,Acroloxus lacustris
+AeGr,Aeshna grandis
+Agra,Agraylea
+Agry,Agrypnia
+AgOb,Agrypnia obsoleta
+AnAn,Anodonta anatina
+AsAq,Asellus aquaticus
+At,Athripsodes
+AtAt,Athripsodes aterrimus
+AtCi,Athripsodes cinereus
+BaFu,Baetis fuscatus
+BaCo,Bathyomphalus contortus
+BiTe,Bithynia tentaculata
+CaHo,Caenis horaria
+CaLa,Caenis lactea
+CaLu,Caenis luctuosa
+CaRi,Caenis rivulorum
+CeLu,Centroptilum luteolum
+CeAn,Ceraclea annulicornis
+CeEx,Ceraclea excisa
+CeFu,Ceraclea fulva
+CeJu,Ceraclea juv.
+CeNi,Ceraclea nigronervosa
+Ce,Ceratopogonidae
+Ch,Chironomidae
+Cl,Cloeon
+ClDi,Cloeon dipterum
+ClJu,Cloeon juv.
+ClSi,Cloeon simile
+CoPu,Coenagrion pulchellum
+CoJu,Coenagrionidae juv.
+CyFl,Cyrnus flavidus
+CyIn,Cyrnus insolutus
+CyJu,Cyrnus juv.
+CyTr,Cyrnus trimaculatus
+Do,Donacia
+DyLa,Dytiscidae larv.
+EcTe,Ecnomus tenellus
+El,Eloeophila
+EpVu,Ephemera vulgata
+Ep,Ephydridae
+Er,Erpobdella
+ErOc,Erpobdella octoculata
+ErTe,Erpobdella testacea
+ErNa,Erythromma najas
+GlCo,Glossiphonia complanata
+GoPi,Goera pilosa
+Gy,Gyraulus
+GyAl,Gyraulus albus
+Hy,Hydrozoa
+Ha,Haliplus
+HaLa,Haliplus larv.
+HeSt,Helobdella stagnalis
+He,Hemerodromia
+HeMa,Hemiclepsis marginata
+HeDa,Heptagenia dalecarlica
+HoPi,Holocentropus picicornis
+Hydrac,Hydracarina
+Hydrae,Hydraena
+Hydro,Hydroptila
+Hyg,Hygrotus
+IlLa,Ilybius larv.
+IsEl,Ischnura elegans
+KaFu,Kageronia fuscogrisea
+LeHi,Lepidostoma hirtum
+LeJu,Leptoceridae juv.
+Le,Leptophlebia
+LeFu,Leuctra fusca
+LiPhidae,Limnephilidae
+LiPhilus,Limnephilus
+LiPa,Limnephilus pantodapus
+LySt,Lymnaea stagnalis
+LyPh,Lype phaeopa
+Mi,Micronecta
+MoAn,Molanna angustata
+MoTi,Molannodes tinctus
+My,Mystacides
+MyAz,Mystacides azurea
+MyJu,Mystacides juv.
+MyLo,Mystacides longicornis
+MyGl,Myxas glutinosa
+Ne,Nematoda
+NeMorph,Nematomorpha
+NePu,Nemotaulius punctatolineatus
+Nem,Nemoura
+NeAv,Nemoura avicularis
+NeCi,Nepa cinerea
+NeBi,Neureclipsis bimaculata
+Ol,Oligochaeta
+OeJu,Oecetis juv.
+OeTe,Oecetis testacea
+OpSe,Ophidonais serpentina
+OrVi,Orectochilus villosus
+Or,Orthotrichia
+OuTu,Oulimnius tuberculatus
+OuTuAd,Oulimnius tuberculatus adult
+OuTuLa,Oulimnius tuberculatus larv.
+Ox,Oxyethira
+Pe,Pedicia
+PhBi,Phryganea bipunctata
+PiGe,Piscicola geometra
+Pi,Pisidium
+PlMa,Platambus maculatus
+PlPe,Platycnemis pennipes
+PlCo,Plectrocnemia conspersa
+PoFl,Polycentropus flavomaculatus
+PoIr,Polycentropus irroratus
+Pr,Procladius
+PsPu,Psychomyia pusilla
+Py,Pyralidae
+PyNy,Pyrrhosoma nymphula
+RaBa,Radix balthica
+RiPa,Ripistes parasita
+Sia,Sialis
+SiLu,Sialis lutaria
+SiSo,Sialis sordida
+Sis,Sisyra
+SoJu,Somatochlora juv.
+SoMe,Somatochlora metallica
+Sp,Sphaerium
+SpFe,Spirosperma ferox
+StPa,Stagnicola palustris
+St,Stenochironomus
+StLa,Stylaria lacustris
+Tu,Turbellaria
+Tab,Tabanidae
+Tan,Tanypodinae
+ThTe,Theromyzon tessulatum
+TiWa,Tinodes waeneri
+Ti,Tipula
+UnUn,Uncinais uncinata
+UnJu,Unionidae juv.
+Va,Valvata
