@@ -1,6 +1,7 @@
 """
 Tiers - a hierarchical label handling library
 """
+
 import bigtree
 import pandas as pd
 import warnings
@@ -465,7 +466,8 @@ class Tree:
         """Shows the tree"""
         if labels:
             self.root.show(attr_list=["labels"], **kwargs)
-        self.root.show(**kwargs)
+        else:
+            self.root.show(**kwargs)
 
     def subset(self, subset):
         """Returns a subset of the tree as a new tree"""
@@ -757,3 +759,119 @@ class Tree:
         new_label_map = self.label_map.copy()
         new_label_map.update(label_map)
         return Tree(df=self.df, label_map=new_label_map, node_remapping=node_remapping)
+
+    def longest_string_on_level(self, labels: Iterable, level: str):
+        """Returns the longest string of list 'labels' when they are mapped to
+        level 'level
+
+        Args:
+            labels (Iterable): list of labels. Only these are considered when
+                calculating the longest list
+            level (str): the labels are mapped to this level using tree.map()
+
+        """
+        return max(
+            [len(self.map(l, level=level, strict=True) or "") for l in set(labels)]
+        )
+
+    def extend_label(self, label: str):
+        """Returns a list of all levels associated with the 'label'
+
+        Args:
+            label (str): A label or a node name.
+        Returns:
+            list: A list of all parents associated with the parent
+        """
+        if not isinstance(label, str):
+            raise ValueError("Label must be a string")
+        parent_list = []
+        for level in self.levels:
+            nodename = self.map(label, level=level, strict=True)
+            if nodename is None:
+                nodename = ""
+            parent_list.append(nodename)
+        return parent_list + [label]
+
+    def extend_labels(
+        self,
+        labels: Iterable[str],
+        pad=False,
+        return_string=False,
+        levels=None,
+        return_array=False,
+    ):
+        """Extends multiple labels. Optionally pads them for pretty printing
+
+        Args:
+            labels (Iterable): An iterable of labels or node names
+            pad (bool): If True, each level will be padded by spaces to match
+                the longest label on the level. Default True
+            return_string (bool): If True, returns a single string, if False,
+                returns a list of the strings. Default True
+            levels (Iterable): List of levels that are only included
+        Returns:
+            (list | np.array): A list of the extended labels (or a numpy array
+                    if return_array=True)
+        """
+        ext_arr = np.array([self.extend_label(l) for l in labels])
+
+        if levels is not None:
+            for l in levels:
+                if l not in self.levels:
+                    raise ValueError(
+                        f"{l} not in tree levels. Available levels are {self.levels}"
+                    )
+            level_inds = [self.level2int(x) for x in levels]
+            ext_arr = np.concatenate(
+                (ext_arr[:, level_inds], ext_arr[:, -1].reshape(-1, 1)), axis=1
+            )
+        else:
+            levels = self.levels
+
+        if pad:
+            pad_ns = [self.longest_string_on_level(labels, l) for l in levels]
+            pad_ns += [max([len(s) for s in labels])]
+
+            for i, p in enumerate(pad_ns):
+                ext_arr[:, i] = np.array([s.rjust(p) for s in ext_arr[:, i]])
+        if return_string:
+            return [" - ".join(l) for l in ext_arr]
+        if return_array:
+            return ext_arr
+        return [l for l in ext_arr]
+
+    def extend_to_multiindex(self, labels: Iterable[str], levels=None) -> pd.MultiIndex:
+        """Extends a list of labels into a pandas MultiIndex
+
+        Args:
+            labels (Iterable): An iterable of labels or node names
+            levels (list, optional): A list of level names for the MultiIndex.
+                    If not provided, the levels from the object will be used.
+
+        Returns:
+            pd.MultiIndex: A pandas MultiIndex of the labels
+        """
+        arr = self.extend_labels(labels, levels=levels, return_array=True)
+        if levels is None:
+            levels = self.levels
+        idx = pd.MultiIndex.from_arrays(arr.T)
+        idx = idx.rename(levels + ["label"])
+        return idx
+
+    def sort_labels(self, labels):
+        """Sorts a list of labels according to their position in the hierarchy
+
+        Args:
+            tree (tiers.Tree): A tree object
+            labels (Iterable): A list of labels
+        Returns:
+            list: A list of labels sorted according to the tree
+        """
+
+        cols = {}
+        for level in self.levels:
+            cols[level] = [self.map(x, level=level, strict=True) for x in labels]
+        cols["label"] = labels
+        taxa_table = pd.DataFrame(cols).fillna("")
+        sort_table = taxa_table.sort_values(self.levels)
+        return sort_table["label"].tolist()

@@ -70,3 +70,16 @@ def df_fillable_gaps():
 @pytest.fixture
 def df_fillable_gaps_not():
     return pd.read_csv("tests/data/fillable_gaps_not.csv")
+
+
+@pytest.fixture
+def df_presence():
+    return pd.read_csv("tests/data/presence.csv")
+
+
+@pytest.fixture
+def dict_abb_map():
+    with open("tests/data/abb_map.txt", "r") as f:
+        content = f.readlines()
+    c = [x.strip().split(",") for x in content]
+    return {x[0]: x[1] for x in c}

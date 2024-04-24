@@ -177,3 +177,29 @@ def test_rels(df_very_simple):
         "B": "root",
         "g3": "B",
     }
+
+
+@pytest.mark.usefixtures("df_full_taxa_table", "dict_abb_map")
+def test_extend_labels(df_full_taxa_table, dict_abb_map):
+    tree = tiers.Tree.from_dataframe(df_full_taxa_table)
+    abb_map = {k: v for k, v in dict_abb_map.items() if v in tree.nodes}
+    tree = tree.update_label_map(abb_map)
+
+    assert tree.extend_label("Oligochaeta") == [
+        "Animalia",
+        "Angiospermae",
+        "Dicotyledoneae",
+        "Campanulales",
+        "Asteraceae",
+        "Oligochaeta",
+        "",
+        "",
+        "Oligochaeta",
+    ]
+    assert tree.extend_labels(["Oligochaeta"], return_string=True, pad=True) == [
+        "Animalia - Angiospermae - Dicotyledoneae - Campanulales - Asteraceae - Oligochaeta -  -  - Oligochaeta"
+    ]
+
+    assert tree.extend_labels(
+        ["Ol", "OuTu"], levels=["order", "genus"], return_string=True, pad=True
+    ) == ["Campanulales - Oligochaeta -   Ol", "  Coleoptera -   Oulimnius - OuTu"]
