@@ -17,6 +17,8 @@ pip install https://github.com/mikkoim/tiers/archive/dev.zip
 
 # Examples
 
+See the [demo notebook](docs/demo.ipynb) for more details.
+
 ## Creating a tiers Tree from a Pandas DataFrame:
 ```python
 import pandas as pd
@@ -69,6 +71,37 @@ tree.set_level("Level1")
 mapped_nodes = tree.map(["Label1", "Label2", "Label3", "Label4", "Label5"])
 print(mapped_nodes) # Output: ['A', 'A', 'B', 'B', 'B']
 ```
+
+## Regrouping pandas dataframes
+```python
+level="order"
+grouped = df.assign(taxon=tree.map(df.index, level=level)).groupby("taxon").sum()
+```
+![Grouping](docs/drawio/readme_grouping.png)
+
+Extending a label into a `pandas.MultiIndex` is also supported.
+
+## Extending formatted label strings for plotting
+
+```python
+import matplotlib.pyplot as plt
+plt.rcParams["font.family"] = "monospace" # Make labels align properly
+df = df.loc[tree.sort_labels(df.index)] # Sort the labels based on the hierarchical order
+
+fig, ax = plt.subplots()
+ax.matshow(df) 
+
+# Tiers works here. Padding is set automatically:
+extended_labels = tree.extend_labels(df.index, return_string=True, pad=True)
+
+# Set the labels
+ax.set_yticks(range(len(df.index)), # Tick locations
+              labels=extended_labels)
+plt.show()
+```
+![Extended labels](docs/images/extended_labels.png)
+
+Subsets of columns can also be selected.
 
 ## Finding the Lowest Common Ancestor for two nodes:
 
